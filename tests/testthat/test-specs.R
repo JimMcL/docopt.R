@@ -1125,7 +1125,7 @@ Options:
 		#{"--drifting": false, "--help": false, "--moored": false, "--speed": "20", "--version": false, "<name>": ["Guardian"], "<x>": "150", "<y>": "300", "mine": false, "move": true, "new": false, "remove": false, "set": false, "ship": true, "shoot": false}
       res <- docopt(doc, 'ship Guardian move 150 300 --speed=20', strict=TRUE)
       expect_equivalent(length(res), 15)
-      expect_equivalent(res[c("--drifting", "--help", "--moored", "--speed", "--version","<name>", "<x>", "<y>", "mine", "move", "new", "remove", "set", "ship", "shoot")], list("--drifting" = FALSE, "--help" = FALSE, "--moored" = FALSE, "--speed" = "20", "--version" = FALSE, "<name>" = "Guardian", "<x>" = "150", "<y>" = "300", mine = FALSE, move = TRUE, new = FALSE, remove = FALSE, set = FALSE, ship = TRUE, shoot = FALSE))
+      expect_equivalent(res[c("--drifting", "--help", "--moored", "--speed", "--version", ,"<name>", "<x>", "<y>", "mine", "move", "new", "remove", "set", ,"ship", "shoot")], list("--drifting" = FALSE, "--help" = FALSE, "--moored" = FALSE, "--speed" = "20", "--version" = FALSE, "<name>" = "Guardian", "<x>" = "150", "<y>" = "300", mine = FALSE, move = TRUE, new = FALSE, remove = FALSE, set = FALSE, ship = TRUE, shoot = FALSE))
     })
 
 #####################
@@ -1217,6 +1217,13 @@ doc <-
       res <- docopt(doc, '--aa', strict=TRUE)
       expect_equivalent(length(res), 2)
       expect_equivalent(res[c("--aabb", "--aa")], list("--aabb" = FALSE, "--aa" = TRUE))
+    })
+
+    test_that('parsing "--a" works',{
+		#$ prog --a
+		#"user-error"
+
+      expect_error(docopt(doc, '--a', strict=TRUE))
     })
 
 #####################
@@ -1355,7 +1362,6 @@ doc <-
 		#{"--ver": 2}
       res <- docopt(doc, '--ver --ver', strict=TRUE)
       expect_equivalent(length(res), 1)
-      skip_on_cran()
       expect_equivalent(res["--ver"], list("--ver" = 2))
     })
 
@@ -1427,6 +1433,16 @@ doc <-
       expect_equivalent(res["go"], list(go = 5))
     })
 
+#####################
+
+context('doc49')
+doc <- 
+'usage: prog [options] [-a]
+
+options: -a
+         -b'
+
+  
     test_that('parsing "-a" works',{
 		#$ prog -a
 		#{"-a": true, "-b": false}
@@ -1444,7 +1460,7 @@ doc <-
 
 #####################
 
-context('doc49')
+context('doc50')
 doc <- 
 'Usage: prog [options] A
 Options:
@@ -1478,7 +1494,7 @@ Options:
 
 #####################
 
-context('doc50')
+context('doc51')
 doc <- 
 'usage: prog [-]'
 
@@ -1501,7 +1517,7 @@ doc <-
 
 #####################
 
-context('doc51')
+context('doc52')
 doc <- 
 'usage: prog [NAME [NAME ...]]'
 
@@ -1524,7 +1540,7 @@ doc <-
 
 #####################
 
-context('doc52')
+context('doc53')
 doc <- 
 'usage: prog [options]
 options:
@@ -1542,7 +1558,7 @@ options:
 
 #####################
 
-context('doc53')
+context('doc54')
 doc <- 
 'usage: prog --hello'
 
@@ -1557,7 +1573,7 @@ doc <-
 
 #####################
 
-context('doc54')
+context('doc55')
 doc <- 
 'usage: prog [--hello=<world>]'
 
@@ -1580,7 +1596,7 @@ doc <-
 
 #####################
 
-context('doc55')
+context('doc56')
 doc <- 
 'usage: prog [-o]'
 
@@ -1603,7 +1619,7 @@ doc <-
 
 #####################
 
-context('doc56')
+context('doc57')
 doc <- 
 'usage: prog [-opr]'
 
@@ -1618,7 +1634,7 @@ doc <-
 
 #####################
 
-context('doc57')
+context('doc58')
 doc <- 
 'usage: git [-v | --verbose]'
 
@@ -1633,7 +1649,7 @@ doc <-
 
 #####################
 
-context('doc58')
+context('doc59')
 doc <- 
 'usage: git remote [-v | --verbose]'
 
@@ -1648,7 +1664,7 @@ doc <-
 
 #####################
 
-context('doc59')
+context('doc60')
 doc <- 
 'usage: prog'
 
@@ -1663,7 +1679,7 @@ doc <-
 
 #####################
 
-context('doc60')
+context('doc61')
 doc <- 
 'usage: prog
            prog <a> <b>'
@@ -1687,7 +1703,7 @@ doc <-
 
 #####################
 
-context('doc61')
+context('doc62')
 doc <- 
 'usage: prog <a> <b>
            prog'
@@ -1703,7 +1719,7 @@ doc <-
 
 #####################
 
-context('doc62')
+context('doc63')
 doc <- 
 'usage: prog [--file=<f>]'
 
@@ -1718,7 +1734,7 @@ doc <-
 
 #####################
 
-context('doc63')
+context('doc64')
 doc <- 
 'usage: prog [--file=<f>]
 
@@ -1735,7 +1751,7 @@ options: --file <a>'
 
 #####################
 
-context('doc64')
+context('doc65')
 doc <- 
 'Usage: prog [-a <host:port>]
 
@@ -1752,7 +1768,7 @@ Options: -a, --address <host:port>  TCP address [default: localhost:6283].'
 
 #####################
 
-context('doc65')
+context('doc66')
 doc <- 
 'usage: prog --long=<arg> ...'
 
@@ -1775,7 +1791,7 @@ doc <-
 
 #####################
 
-context('doc66')
+context('doc67')
 doc <- 
 'usage: prog (go <direction> --speed=<km/h>)...'
 
@@ -1790,7 +1806,7 @@ doc <-
 
 #####################
 
-context('doc67')
+context('doc68')
 doc <- 
 'usage: prog [options] -a
 
@@ -1807,7 +1823,7 @@ options: -a'
 
 #####################
 
-context('doc68')
+context('doc69')
 doc <- 
 'usage: prog [-o <o>]...
 
@@ -1832,7 +1848,7 @@ options: -o <o>  [default: x]'
 
 #####################
 
-context('doc69')
+context('doc70')
 doc <- 
 'usage: prog [-o <o>]...
 
@@ -1857,7 +1873,7 @@ options: -o <o>  [default: x y]'
 
 #####################
 
-context('doc70')
+context('doc71')
 doc <- 
 'usage: prog -pPATH
 
@@ -1874,7 +1890,7 @@ options: -p PATH'
 
 #####################
 
-context('doc71')
+context('doc72')
 doc <- 
 'Usage: foo (--xx=x|--yy=y)...'
 
@@ -1889,7 +1905,7 @@ doc <-
 
 #####################
 
-context('doc72')
+context('doc73')
 doc <- 
 'usage: prog [<input file>]'
 
@@ -1904,7 +1920,7 @@ doc <-
 
 #####################
 
-context('doc73')
+context('doc74')
 doc <- 
 'usage: prog [--input=<file name>]...'
 
@@ -1919,7 +1935,7 @@ doc <-
 
 #####################
 
-context('doc74')
+context('doc75')
 doc <- 
 'usage: prog good [options]
            prog fail [options]
@@ -1937,7 +1953,7 @@ options: --loglevel=N'
 
 #####################
 
-context('doc75')
+context('doc76')
 doc <- 
 'usage:prog --foo'
 
@@ -1952,7 +1968,7 @@ doc <-
 
 #####################
 
-context('doc76')
+context('doc77')
 doc <- 
 'PROGRAM USAGE: prog --foo'
 
@@ -1967,29 +1983,10 @@ doc <-
 
 #####################
 
-context('doc77')
+context('doc78')
 doc <- 
 'Usage: prog --foo
            prog --bar
-NOT PART OF SECTION'
-
-  
-    test_that('parsing "--foo" works',{
-		#$ prog --foo
-		#{"--foo": true, "--bar": false}
-      res <- docopt(doc, '--foo', strict=TRUE)
-      expect_equivalent(length(res), 2)
-      expect_equivalent(res[c("--foo", "--bar")], list("--foo" = TRUE, "--bar" = FALSE))
-    })
-
-#####################
-
-context('doc78')
-doc <- 
-'Usage:
- prog --foo
- prog --bar
-
 NOT PART OF SECTION'
 
   
@@ -2008,6 +2005,7 @@ doc <-
 'Usage:
  prog --foo
  prog --bar
+
 NOT PART OF SECTION'
 
   
@@ -2022,6 +2020,24 @@ NOT PART OF SECTION'
 #####################
 
 context('doc80')
+doc <- 
+'Usage:
+ prog --foo
+ prog --bar
+NOT PART OF SECTION'
+
+  
+    test_that('parsing "--foo" works',{
+		#$ prog --foo
+		#{"--foo": true, "--bar": false}
+      res <- docopt(doc, '--foo', strict=TRUE)
+      expect_equivalent(length(res), 2)
+      expect_equivalent(res[c("--foo", "--bar")], list("--foo" = TRUE, "--bar" = FALSE))
+    })
+
+#####################
+
+context('doc81')
 doc <- 
 'Usage: prog [options]
 

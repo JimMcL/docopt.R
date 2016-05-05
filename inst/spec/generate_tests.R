@@ -14,7 +14,7 @@ cases <- unlist(str_split(cases, "\nr"))
 
 #case1 <- cases[1]
 
-p_usage <- 'r?\\"\\"\\"(.*?)\\"\\"\\"\n'
+p_usage <- 'r?\\"\\"\\"((.|\n)*?)\\"\\"\\"\n'
 p_test <- '^([^\n]+)\n(.+?)\n\n'
 p_prog <- '\\$ prog([^\n]*)\n([^\n]*)\n'
 
@@ -86,4 +86,4 @@ doc <-
 {{/cases}}
 "
 
-writeLines(whisker.render(template), "../../tests/testthat/test_specs.R")
+writeLines(whisker.render(template), "../../tests/testthat/test-specs.R")

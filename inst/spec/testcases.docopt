@@ -653,6 +653,7 @@ $ prog go go go go go
 #
 # [options] does not include options from usage-pattern
 #
+
 r"""usage: prog [options] [-a]
 
 options: -a
