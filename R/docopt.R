@@ -140,7 +140,7 @@ formal_usage <- function(printable_usage){
   pu <- unlist(str_split(formal, "\\s+"))
   prog <- pu[1]
   pu[pu==prog] <- "|"
-  formal <- str_c(tail(pu, -1), collapse=" ")
+  formal <- str_c(utils::tail(pu, -1), collapse=" ")
   formal
 }
 
